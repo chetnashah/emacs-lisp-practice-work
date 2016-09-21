@@ -37,3 +37,15 @@
 (null '())  ;;t
 (null '(4)) ;;nil
 
+(if (null nil) (print 2) (print 3))
+
+(+ 54 (* 34 9) 34) ;; try out barfing and slurping in paredit with C- -> and C- <-
+
+(+ 32
+   (+ 23 23)
+   (* 23 23
+      (+ 23 12 11))) ;; strucutural navigation between siblings with C-M-f and C-m-b and
+                     ;; strucutural navigation child side C-m-d down and parent side C-m-u
+
+
+
