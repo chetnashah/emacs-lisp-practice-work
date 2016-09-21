@@ -1,0 +1,30 @@
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+(+ 2 (+ 3 3))
+
+fill-column
+
+(set 'flowers '(u oo tf))
+
+flowers
+
+(setq ctre 0)
+(setq ctre (+ ctre 1))
+
+ctre
+
+(concat "abc" "Def")
+
+(substring "jay shah" 0 3)
+
+(message "kya msg hai yaar %d" 33)
+
+(buffer-name)
+
+(buffer-file-name)
+
+(switch-to-buffer (other-buffer))
+
+(buffer-size)
