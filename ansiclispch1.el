@@ -53,5 +53,103 @@ nil ;; nil
 
 
 
+;; ways to make lists -
+
+;; construct list with "cons"
+;; cons takes an atom and a list and puts atom as head of list
+
+(cons 'a '(b c d))      ;; (a b c d)
+(cons 'a (cons 'b nil)) ;; (a b)
+(cons 'a nil)           ;; (a)
+
+;; alternatively you can use the list function
+(list 'a 'b 'c 'd) ;; (a b c d)
+(list 'a '(b c d)) ;; (a (b c d))
+
+;; car and cdr
+;; car returns the head of list as an atom
+;; cdr returns the tail of list as list
+
+(car '(a b c d)) ;; a
+(cdr '(a b c d)) ;; (b c d)
+
+;; see list predicates
+
+;; if special operator
+;; (if predicate b1 b2) -> if predicate is true, follow b1 else follow b2
+
+(if (listp 27)
+    (+ 1 2)
+  (* 5 2))  ;; 10
+
+;; everything except nil is truthy, here 27 is truthy
+
+(if 27 1 2) ;; 1
+
+(and nil 5 5 5)       ;; returns nil if any one is false and stop checking immediatel
+(and 3 t 4 (+ 33 33)) ;; if all are t, returns last evaluated
+(or 8 t 3)            ;; does not evaluate rest when finds t, returns 8
+(or 7 9 nil)          ;; returns 7
+
+;; 'and' and 'or' are macros, like special operators, macros can circumvent evaluation rule
 
 
+;;-----------------------------defining functions ------------------------------
+
+;; use defun to define functions
+;; (defun fnName argList procedure)
+;; not fnName and argList won't be evaluated so you don't need to quote them
+(defun printtoscreen (m)
+  (message m))
+
+(printtoscreen "jayshah")
+
+;; you can say the above function binds symbol printtoscreen to a lambda with arg m and body message m
+
+;; a list has to be quoted othewise it will be treated as code
+
+;; structural recursion with car and cdr
+;; write a function our-member that takes an atom and a list and returns t if atom is member of list
+
+
+
+;; ------------------------------------------ variables and assignment ---------------------------------
+
+;; let helps you create local variables
+;; bind variables according to varlist, then eval body
+;; varlist is like ((Symbol Valueform) (Symbol Valueform) ... )
+;; (let varlist body..)
+(let ((x 1) (y 2))
+  (+ x y))               ;; 3
+
+;;Question : can valueform be an expression -> let's try
+(let ((a (+ 88 88)) (b 9))
+  (+ a b))
+;; yes valueform can itself be an expression
+
+;; return value of let is evaluation of body
+
+(defun ask-number ()
+  (message "Please enter a number")
+  (let ((val (read)))
+    (if (numberp val)
+	val
+      (ask-number))))
+
+(ask-number)
+
+;; let variable names can cause shadowing so it is a good practice
+;; to keep global names like *globaname* etc.
+
+;;-------------------assignment------------------------------
+
+;; main idea is set, setq, setf
+;; set is set
+;; setq is setquote
+;; setf is setField -> a generalized version of setq
+(set ss '(1 2 3 4))         ;; error ss has no value
+(set (quote ss) '(1 2 3 4)) ;; OK
+(setq ss '(1 2 3 4))        ;; OK same as above
+(setf ss '(1 2 3 4))        ;; OK, similar as above
+
+;; we will come back to setf
