@@ -1,0 +1,34 @@
+
+(+)  ;; evaluates to 0
+(+ 2) ;; evaluates to 2
+(+ 2 3) ;; evaluates to 5
+
+;; expressions can be nested
+(/ (- 7 1) (- 4 2))
+
+;; evaluation semantics
+
+;; 1. firrst arguments are evaluated , from left to right
+;; 2. the values evaluated in these arguments are thne passed to the function
+
+( / (-7 1) (- 4 2))
+
+;; quote is a special operator : meaning distinct evaluation rule of its own -> do nothing
+;; protecting expressions from evaluation
+(quote (+ 3 5))
+'( / 5 6)
+
+;;------------------------------------------------------------------------------
+;; Data types
+
+;; integers evaluate to themselves
+2
+
+;; strings evaluate to themselves
+"hi"
+
+;; Symbols do not (usually) evaluate to themselves, so if you want to refer to symbol refer it, quote it
+'Artichoke
+
+
+
