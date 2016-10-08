@@ -153,3 +153,91 @@ nil ;; nil
 (setf ss '(1 2 3 4))        ;; OK, similar as above
 
 ;; we will come back to setf
+
+;; let's define a function
+(defun plus10 (x)
+  (+ x 10))
+
+;; apply function to succcessive cars of the list -> 1 2 3 4 5
+(mapcar 'plus10 '(1 2 3 4 5)) ;; (11 12 13 14 15)
+
+
+;; apply function to successive cdrs of the list -> (2 3 4 5) (3 4 5) (4 5) (5)
+(maplist 'car '(1 2 3 4 5))
+
+;; think of conses as trees also : left subtree is car and right subtree is cdr. they are unbalanced but binary trees nonetheless
+;; recursive program to copy expressions
+
+;; define our-member which takes an obj and list and tells if obj is member of list
+
+;; built-in fn member returns nil if element not present in list
+;; comparision done with equal fn and return value is tail of list whose car is elt
+(member '5 '(1 2 3 4)) ;; nil
+(member '3 '(1 2 3 4)) ;; (3 4)
+(member '(1 1) '(9 8 (1 1) 99)) ;;((1 1) 99) 
+
+;; built in fn equal
+(equal 3 3)    ;; t
+(equal 4 "4")  ;; nil
+(equal () nil) ;; t
+(equal () '()) ;; t
+(equal nil 0)  ;; nil
+(equal '(3 3 2) '(3 3 2)) ;; t
+;; this contrasts against eql as -> equal is value equality/structural equality
+;; eql is reference/atomic/numerical equality
+(eql '(3 3 2) '(3 3 2)) ;; nil
+
+;; adjoin : return item consed onto front of list only if it is not in list, else return list unmodified
+(adjoin 'c '(a b c)) ;; (a b c)
+(adjoin 'z '(a b c)) ;; (z a b c)
+
+(defun my-adjoin (obj lst)
+  (if (member obj lst)
+      lst
+    (cons obj lst)))
+
+(my-adjoin 'b '(a b c))
+(my-adjoin 'z '(a b c))
+
+;; union takes two lists and joins them using set union operation
+;; also since they are sets there is no notion of ordering
+(union '(a b c) '(a b s)) ;; (s a b c)
+(intersection '(a b c) '(s b c)) ;; (c b)
+(set-difference '(a b c d e) '(b e)) ;; (d c a)
+
+;; if you care about order in a set you are thinking of something
+;; akin an array or a vector which in lisp is known as a 'sequence'
+
+;; lets see some common functions
+(length '(a b c)) ;; 3
+
+;; subseq takes a list and start index, optional end index and slices list to return subseq
+(subseq '(a b c d) 1 2) ;; (b)
+(subseq '(a b c d) 1) ;; (b c d)
+
+;; you can check whether optional parameters were passed or not
+;; using null predicate
+(defun my-subseq (lst st &optional nd)
+  (if (and (eql st 0) (null nd))
+      lst
+    (my-subseq (cdr lst) (1- st))))
+
+(my-subseq '(a b c d e) 2) ;; (c d e)
+;; TODO now make one that uses nd
+
+;; reverse takes a list and reverses it copying
+(reverse '(a b c)) ;; (c b a)
+
+
+(defun my-reverse (lst)
+  (if (null lst)
+      lst
+    (append (my-reverse (cdr lst)) (list (car lst)))))
+
+(my-reverse '(1 2 3 4))
+
+;; works like concat takes a list of lists and appends them
+(append '(2) '(4))
+
+
+
