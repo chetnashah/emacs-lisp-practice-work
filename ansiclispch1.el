@@ -239,5 +239,69 @@ nil ;; nil
 ;; works like concat takes a list of lists and appends them
 (append '(2) '(4))
 
+;; (push x lst) pushes x onto front of lst where lst should be a variable
+(setf ls '(1 1))
+(push 2 ls) ;; (2 1 1)
+
+;; (push obj lst) is equivalent to (setf lst (cons obj lst))
+(defun my-push (obj lst)
+  (setf lst (cons obj lst)))
+
+(my-push 3 ls) ;; (3 2 1 1)
+
+;; (pop lst) returns front most element from listvar, if nil returns nil.
+(pop ls) ;; 2, yes it is changing the listvar ls
+(pop ls) ;; 1
+(pop ls) ;; 1
+(pop ls) ;; nill
+
+(defun my-pop (lst)
+  (let ((x (car lst)))
+    (setf lst (cdr lst))
+    x))
+
+(my-push '3 '(2 2 2)) ;; these are unlike modifying listvars
+(my-pop '(9 39 3)) ;; these are unlike modifying listvars
+
+;;;;;;;;;;interesting info on lists : DOTTED LISTS ;;;;;;;;;;;;;;;;;;
+(setf pp (cons 'a 'b))  ;; (a.b)
+;; in a dotted list car and cdr are seperated by a dot.
+(cons 'a nil) ;; (a) ;;what sorcery is this?
+(cons 'a (cons 'b (cons 'c nil))) ;; (a b c)
+(cons 'a (cons 'b (cons 'c 'd))) ;; (a b c . d)
+
+(cons 'a (cons 'b nil)) ;; (a b)
+(cons 'a '(b)) ;; (a b)
+
+;; other great things about conses
+;; are they are substitute for pairs
+;; and could be used for something like hashmaps
+;; a list of consesis called assoc-list or alist
+
+(setf trans '((+ . "add") (- . "substract")));;((+ . "add") (- . "substract"))
+;; assoc function is used to retrieve pair from hashmap(assoclist)
+;; assoc takes a key and a alist and returns the pair
+(assoc '+ trans) ;; (+ . "add")
 
 
+;;;;;;;;;;;;;;;;;;;;;;; ch -3 exercises ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; append obj to list if does not exist
+(defun adj-exist (lst obj)
+  (if (or (member obj lst) (null obj))
+      lst
+    (append lst (list obj))))
+
+(adj-exist nil nil)
+
+;; new-union is a union that preserves order
+;;How did I do this?
+(defun new-union (l1 l2)
+  (if (null l2)
+      l1
+    (new-union (adj-exist l1 (car l2)) (cdr l2))))
+	    
+(new-union '(1 2 3 4) '(1 2 9 8 0))
+(set-difference '(1 2 3 4) '(1 2))
+
+(member '(a) '((a) (b)))
