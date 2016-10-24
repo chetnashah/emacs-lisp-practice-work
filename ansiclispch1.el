@@ -305,3 +305,43 @@ nil ;; nil
 (set-difference '(1 2 3 4) '(1 2))
 
 (member '(a) '((a) (b)))
+
+
+;; learning about funcall and apply
+;; what is the most basic way to call a function ? put it as first mem of list)
+
+(concat "a" "b") ;; "ab"
+
+;; above is when you know which function to call in advance
+;; to mix in some meta programming, you might need to compute at run time which function to call, to do that you use funcall, when you also need to determine how many values to pass, use apply
+
+;; funcall calls functions with arguments, and returns whaterver function returns
+
+(setq f 'list) ;; assign name f to functio list
+(funcall f 'x 'y 'z) ;; (x y z)
+
+;;NOTE : all arguments to funcall are evaluated and so x, y, z are quoted
+
+(funcall 'and t nil) ;;ERROR: invalid function and, because and is a special form.
+(funcall 'list 'x 'y 'z) ;; OK, lisp functions/built-in functions allowed, special forms and macros not allowed in funcall, list is a built-in function
+
+;; apply takes two arguments : 1) function to be called. 2) list of arguments to call fun wit
+
+(apply 'list '(x y z)) ;; (x y z) - subtle huh ?
+(apply '+ '(1 2 3 5)) ;; 10 - u see varags here?
+
+;; while we are taking look at funcall and apply, lets also have a brief look at lambda
+;; it is different from defun in the way that defun takes name, args, body and attaches the function you made using args and body resulting fun to the given name
+;; lambda on the other hand just takes args and body and is a fn with no name. you can call it immedeately only or use it somewhere a fn is expected
+
+;; the anonymous-equivalent(lambda) of multiply-by-seven is
+(lambda (number) (* 7 number))
+
+;; call it with 3
+((lambda (number) (* 7 number)) 3) ;; 21
+
+;; let's try passing a lambda to a funcall - funcall dont care abt name
+(funcall (lambda (number) (* 7 number))
+	 '3) ;; 21
+
+
