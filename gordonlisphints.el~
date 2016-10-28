@@ -1,0 +1,16 @@
+
+
+;; symbols and bindings
+;; symbols can be bound to values
+;; symbols can globally be bound to values using setq
+
+
+(setq a 5)
+
+a ; 5
+
+;; symbols can be locall bound to values using let, shadowing global value of same symbol locally inside
+(let ((a 99)) a) ;; 99
+
+a ; 5
+

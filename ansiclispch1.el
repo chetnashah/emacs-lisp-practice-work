@@ -345,3 +345,23 @@ nil ;; nil
 	 '3) ;; 21
 
 
+
+
+
+;; Lisp forms
+;; -A lisp object that is intended to be evaluated is called a form (or an expression)
+
+
+;; Lisp special form : are reserved primitive functions specially marked so arguments
+;; are not all evaluated
+;; Every special form has its own rules for which arguments to evaluate and which to not
+
+;;-----------------------------Lisp control structures -------------------
+;;                      to control when, whether and how many times to execute
+
+;; first control structure : sequencing
+
+
+;; second control structure : conditional
+;; third control structure : iteration
+;; fourth contorl structor: controlled jumps
