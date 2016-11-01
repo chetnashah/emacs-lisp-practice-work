@@ -29,8 +29,6 @@
 (getf (make-cd "Roses" "kathy" 3 t) :rating) ;; 3 , get rating of the made cd record
 
 
-
-
 ;; to make a data base we need more than a record, we need a list of records
 ;; or in our case list of lists
 
@@ -39,5 +37,21 @@
 
 ;; we will implement CRUD 
 
+;; insert or add-record to *db*
+(defun add-record (cd)
+  (push cd *db*))
+
+(add-record (make-cd "Roses" "kathy" 7 t))
+(add-record (make-cd "Fly" "Dixie" 8 t))
+(add-record (make-cd "Home" "Dixie" 9 t))
+
+*db* ;; 3 records
 
 
+;; need to understand format
+;; function to print *db*
+(defun dump-db ()
+  (dolist (ab *db*)
+    (format t "~{~a:~10t~a~%~}~%" ab)))
+
+(dump-db)
