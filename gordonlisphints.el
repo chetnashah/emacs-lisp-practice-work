@@ -203,6 +203,21 @@ stck ;; (0 99 4)
 
 
 
+;;;;-------------------------------defvar--------------------------
+;; defvar special form is similar to setq in that it sets value
+;; of a global variable. It is unlike setq in two ways :
+;; 1. defvar only sets value of variable if variable already does not
+;;    have a value
+;; 2. If variable already has a value, defvar does not override value
 
+(defvar meaning-of-universe 42
+  "The answer to everything")
 
+meaning-of-universe ;; 42
+
+;; below defvar execution has no effect if it finds variable with val
+(defvar meaning-of-universe 88
+  "Thou shall not pass")
+
+meaning-of-universe ;; still 42
 
