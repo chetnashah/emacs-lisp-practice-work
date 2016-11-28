@@ -1,0 +1,5 @@
+
+Racket could be seen as an advanced scheme dialect
+A useful place to goin to scheme from lisp :
+https://www.cs.utexas.edu/~novak/schemevscl.html
+

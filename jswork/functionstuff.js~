@@ -1,0 +1,10 @@
+
+function testfn(){
+    console.log('arguments obj = ', arguments);
+}
+
+
+test();
+ 
+//
+testfn(1,2,3);
