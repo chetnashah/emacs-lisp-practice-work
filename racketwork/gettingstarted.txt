@@ -3,3 +3,35 @@ Racket could be seen as an advanced scheme dialect
 A useful place to goin to scheme from lisp :
 https://www.cs.utexas.edu/~novak/schemevscl.html
 
+Racket has an amazingly simple syntax:
+
+A term(anything in the language) is either :
+  - An atom (e.g. #t, #f, 34, "hi", null, 4.0, x,..
+  - A special form e.g. if, lambda, define etc. (Macros will let us define our own)
+  - A sequence of terms in parens: (t1 t2 .. tn)
+    * if t1 is a special form, semantics of sequence is special
+    * else a function call
+
+Evaluation rules:
+  For a regular sequence, all the arguments are evaluated first, then then
+  the function with the arguments
+
+Relation between racket/lisp programs and Asts:
+Atoms are leaves,
+Sequences have first one as parent and rest of arguments as child nodes(prefix notation)
+(No parsing ambiguity)
+
+Parens are never optional or meaningless!!!
+In most places (e) means
+1. evaluate e
+2. call e with zero arguments
+
+So ((e)) means call evaluate e, call e with zero args, and call the result with zero args
+
+functions defined with define are first class and you can pass them to other functions
+e.g.
+e.g. define a function using define and then
+try using it in higher order fn like map
+
+
+
