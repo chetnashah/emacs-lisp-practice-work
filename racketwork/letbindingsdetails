@@ -1,0 +1,95 @@
+#lang racket
+
+(define (max-of-list xs)
+  (cond [(null? xs) (error "max of list given empty list")]
+        [(null? (cdr xs)) (car xs)]
+        [#t (let ([tlans (max-of-list (cdr xs))])
+              (if (> tlans (car xs))
+                  tlans
+                  (car xs)))]))
+
+;; learned from https://docs.racket-lang.org/guide/let.html
+
+(let ([x 3])
+  x)
+
+;; it can be list of bindings
+;; x, y, z are identifiers
+(let ([x 5]
+      [y 2]
+      [z 33])
+  (+ x y z))
+
+;; let is a special form
+;; general syntax form is
+;; (let ([id val-expr] ... )
+;;   body)
+;; evaluation rule:
+;; 1. eval val-expr //Note: val-expr does not see id it is being bound to..
+;; 2. create new location for each id
+;; 3. place values generated in (1.) into locations of ids
+;;   Note: all val-exprs should be evaluated first,
+;;         then bindings happen in parelle, hence parellel let binding
+;; 4. evaluate the body in which ids are available with values bound via 3.
+;; Note: ids must be different from each other
+
+(let ([me "bob"])
+  me)
+
+(let ([me "bob"]
+      [myself "Robert"]
+      [I "Bobby"])
+  (list me myself I))
+
+;; throws error: duplicate id me
+;;(let ([me "Bob"]
+;;      [me "Robert"])
+;;  me)
+
+;; the fact that val-expr does not see its own binding is
+;; often useful for wrappers that refer back to old value
+
+(let ([+ (lambda (x y)
+           (if (string? x)
+               (string-append x y)
+               (+ x y)))]); using original +
+  (list (+ 1 2)
+        (+ "see" "saw")))
+
+;; another case of usefulness of parellel nature of let
+;; binding
+
+(let ([me "Tarzan"]
+      [you "jane"])
+  (let ([you me]
+        [me you])
+    (list me you)))
+
+
+;; let* or also known as sequential let binding
+;; Same syntax form :
+;; (let* ([id expr] ...)
+;;   body)
+;; here the difference is
+;; environment is enriched by id bindings one by one ...
+;; So also, ids can have same name
+
+(let* ([x 2]
+       [x (+ x 2)] ;; (+ x 2) expr sees x as 2
+       [x (+ x 99)]) ;; (+ x 99) expr sees x as 4
+  x)
+
+(let* ([name (list "Ahoy")]
+       [name (cons "Rice" name)]
+       [name (cons "Edgar" name)])
+  name)
+  
+;; coming to think of it,
+;; let* can also be achieved by doing nested lets
+;; so that bindings happen one by one ...
+
+(let ([name (list "Burroughs")])
+  (let ([name (cons "Rice" name)])
+    (let ([name (cons "Edgar" name)])
+      name)))
+

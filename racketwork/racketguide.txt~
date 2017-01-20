@@ -1,0 +1,6 @@
+
+
+When using cmd racket repl,
+to load a file use
+(enter! "filename.rkt")
+
