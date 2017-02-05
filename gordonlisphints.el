@@ -18,7 +18,7 @@ a ; 5
 ;; when symbol needs to be evaluated, it will evaluate to its bound value
 (+ 4 a) ;; 9
 
-b ;; if you try to evaluate a symbol that is not bound to a value, it will result in error
+;; b ;; if you try to evaluate a symbol that is not bound to a value, it will result in error
 
 
 
