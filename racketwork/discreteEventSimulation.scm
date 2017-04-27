@@ -1,3 +1,30 @@
+;; queue implmentation
+;; (make-queue)
+
+(define (make-queue)
+  (cons '() '()))
+
+;; queue is maintained as a pair of pointers
+(define (front-ptr queue)
+  (car queue))
+
+(define (rear-ptr queue)
+  (cdr queue))
+
+(define (set-front-ptr! queue item)
+  (set-car! queue item))
+
+(define (set-rear-ptr! queue item)
+  (set-cdr! queue item))
+
+(define (empty-queue? queue)
+  (null? (front-ptr queue)))
+
+;; front-queue return front item on queue, does not mutate
+
+;; insert-queue! inserts item into rear of queue
+
+;; delete-queue! removes item from the front of queue
 
 ;; make sure guiser repl for scheme is installed
 (define (logical-not s)
@@ -119,4 +146,110 @@
 (define (add-action! wire proc)
   ((wire 'add-action!) proc))
 
+
+
+;; agenda is our shceduler it keeps list of functions to run
+;; and runs them one after another
+
+;; (make-agenda)
+;; returns an empty new agenda
+
+;; (empty-agenda? <agenda>)
+;; return true if given agenda is empty
+
+;; (first-agenda-item <agenda>)
+;; returns the first item of the agenda
+
+;; (remove-first-agenda-item! <agenda>)
+;; mutate agenda object by removing first agenda item
+
+;; (current-time <agenda>)
+;; returns the current simulation time
+
+(define (after-delay delay action)
+  (add-to-agenda! (+ delay (current-time the-agenda))
+                  action
+                  the-agenda))
+
+;; simulation is driven by propogate which is like event loop
+;; where it continuously checks items in agenda and executes it
+
+(define (propogate)
+  (if (empty-agenda? the-agenda)
+      'done
+      (let ((first-item (first-agenda-item the-agenda)))
+        (first-item)
+        (remove-first-agenda-item! the-agenda)
+        (propogate))))
+
+;; putting probe on a wire
+;; probe tells input wire to print probe name, time and value when signal changes
+
+(define (probe name wire)
+  (add-action! wire
+               (lambda ()
+                 (newline)
+                 (display name)
+                 (display " ")
+                 (display (current-time the-agenda))
+                 (display " New-value = ")
+                 (display (get-signal wire)))))
+
+
+;; agenda is made up of time segments
+;; Each time segment is a pair consisting of pair: (time, queue of procedures to run at time)
+;;
+
+(define (make-time-segment time queue)
+  (cons time queue))
+
+(define (segment-time s)
+  (car s))
+
+(define (segment-queue s)
+  (cdr s))
+
+;; agenda is one dimensional table of time segments
+;; the head of the agenda list will be current time (i.e. time of last action that was processed)
+;; the segments are sorted in increasing order of time
+;; a newly constructed agenda has no time segments and current time of 0
+
+(define (make-agenda)
+  (list 0))
+
+(define (current-time agenda)
+  (car agenda))
+
+(define (set-current-time! agenda time)
+  (set-car! agenda time))
+
+(define (segments agenda)
+  (cdr agenda))
+
+(define (set-segments! agenda segments)
+  (set-cdr! agenda segments))
+
+(define (first-segment agenda)
+  (car (segments agenda)))
+
+(define (rest-segments agenda)
+  (cdr (segments agenda)))
+
+(define (empty-agenda? agenda)
+  (null? (segments agenda)))
+
+
+;; (add-to-agenda! <time> <action> <agenda>)
+;; mutate agenda object by adding action procedure to be run at specified
+;; time
+
+(define (add-to-agenda! time action agenda)
+  (define (belongs-before? segments)
+    (or (null? segments)
+        (< time (segment-time (car segments)))))
+  (define (make-new-time-segment time action)
+    (let ((q (make-queue)))
+      (insert-queue! q action)
+      (make-time-segment time q)))
+)
 

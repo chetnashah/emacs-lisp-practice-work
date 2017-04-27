@@ -18,3 +18,6 @@ var re2 = new RegExp('ab+c','g');
 // when g flag is set re has a member named lastIndex
 // which is the index at which to start next match
 
+function kk(){
+    console.log('hi');
+}
