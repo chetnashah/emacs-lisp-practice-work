@@ -3,6 +3,7 @@
 ### chap 1
 
 * An atom is a string of charachters beginning with a letter or a number
+* All numbers are atoms
 * A list (empty or otherwise) is never an atom
 * All atoms are S-expressions
 * All lists are S-expressions
@@ -27,6 +28,8 @@
 * member? can be implemented using eq?
 
 * First Commandment - Always ask null? as first question in expressing any function (Or in other words put base case first)
+
+* Second commandment - Use cons to build lists
 
 
 

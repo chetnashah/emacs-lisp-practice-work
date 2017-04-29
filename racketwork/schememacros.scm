@@ -11,6 +11,37 @@
   (syntax-rules ()
     [(_ x) (set! x '())]))
 
+;; the general syntax can be shown as
+;; (define-syntax id
+;;   (syntax-rules (literal-id ...)
+;;     [pattern template]
+;;     [pattern2 template2]
+;;     ...))
+
+(define-syntax incf
+  (syntax-rules ()
+    [(_ x) (begin (set! x (+ x 1)) x)]
+    [(_ x i) (begin (set! x (+ x i)) x)]
+    ))
+
+(define bb 1)
+(incf bb)
+(display bb)
+(incf bb 11)
+(display bb)
+
+;; lets play some more
+
+(define-syntax kwote
+  (syntax-rules ()
+    [(kwote exp1) (quote exp1)]))
+
+;; (kwote (foo bar)) will not evaluate foo
+
+
+;; see recursive definition of macros
+
+
 
 
 
