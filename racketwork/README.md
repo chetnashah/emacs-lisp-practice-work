@@ -19,3 +19,37 @@ And it should be same as one shown in your minor mode
 
 More on http://geiser.nongnu.org/geiser_4.html
 
+Trace recursive function calls in guile with ,trace
+gives a nice execution stack like so:
+
+e.g. non tail recursive evaluation
+scheme@(guile-user)> (define (fact1 n) 
+                       (if (zero? n) 1
+                           (* n (fact1 (1- n)))))
+scheme@(guile-user)> ,trace (fact1 4)
+trace: (fact1 4)
+trace: |  (fact1 3)
+trace: |  |  (fact1 2)
+trace: |  |  |  (fact1 1)
+trace: |  |  |  |  (fact1 0)
+trace: |  |  |  |  1
+trace: |  |  |  1
+trace: |  |  2
+trace: |  6
+trace: 24
+
+And tail recursive:
+scheme@(guile-user)> (define (facti acc n)
+                       (if (zero? n) acc
+                           (facti (* n acc) (1- n))))
+scheme@(guile-user)> (define (fact2 n) (facti 1 n))
+scheme@(guile-user)> ,trace (fact2 4)
+trace: (fact2 4)
+trace: (facti 1 4)
+trace: (facti 4 3)
+trace: (facti 12 2)
+trace: (facti 24 1)
+trace: (facti 24 0)
+trace: 24
+
+

@@ -110,12 +110,13 @@
 ;; stream-filter is interesting
 
 (define (stream-filter pred stream)
-  (cond ([(stream-null? stream) the-empty-stream]
+  (cond [(stream-null? stream) the-empty-stream]
          [(pred (stream-car stream))
           (cons-stream (stream-car stream)
                        (stream-filter pred (stream-cdr stream)))]
          [#t (stream-filter pred (stream-cdr stream))]
-         )))
+         ))
+
 
 (define (stream-enumerate-interval low hi)
   (if (> low hi)
@@ -133,4 +134,10 @@
 
 ;; reason why below wont work?
 (define xxx (stream-map shower (stream-enumerate-interval 1 10)))
+
+(define (stream-ref stream n)
+  (if (= n 0)
+      (stream-car stream)
+      (stream-ref (stream-cdr stream) (- n 1))))
+
 
