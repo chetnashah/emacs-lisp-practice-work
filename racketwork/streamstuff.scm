@@ -1,4 +1,4 @@
-;; -*- geiser-scheme-implementation: guile -*-
+;; -*- geiser-scheme-implementation: chicken -*-
 
 ;;
 ;; As a data abstraction, streams are same as lists.
@@ -139,5 +139,43 @@
   (if (= n 0)
       (stream-car stream)
       (stream-ref (stream-cdr stream) (- n 1))))
+
+
+;; ex 3.52
+
+(define sum 0)
+
+(define (accum x)
+  (set! sum (+ x sum))
+  sum)
+
+;; customary infinite sequences with cons-stream
+
+(define (integers-starting-from n)
+  (cons-stream n (integers-starting-from (+ n 1))))
+
+
+(define integers (integers-starting-from 1))
+
+;; try to do on repl
+;; (display-stream integers)
+
+;; we can get other subset of infinite streams
+(define even-integers (stream-filter even? integers))
+
+(define (divisible? x y)
+  (= 0 (remainder x y)))
+
+(define (not-div-by-7 x)
+  (lambda (x) (not (divisible? x 7))))
+
+(define no-sevens
+  (stream-filter not-div-by-7 integers))
+
+;; generate some interesting infinite inductive streams
+
+;; like fibonacci series
+
+;; like seive of erastothenes
 
 
