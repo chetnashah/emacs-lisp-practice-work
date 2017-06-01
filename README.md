@@ -6,3 +6,11 @@ A note on basic Common Lisp implementations:
 * Free, JVM based: ABCL
 * Free with high level of native impl: SBCL, CCL, CMUCL
 
+Scheme implementations :
+Guile (primarily linux)
+Chicken (linux/windows)
+chez
+chibi
+mit
+
+
