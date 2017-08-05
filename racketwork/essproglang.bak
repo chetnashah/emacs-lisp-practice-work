@@ -1,0 +1,11 @@
+
+
+;; inductive specification
+
+;; (in-S n)  ::: Nat -> Bool
+;; in-S if n = 0 or n - 3 belongs to S
+
+(define (in-S? n)
+  (cond ((zero? n) #t)
+        ((>= n 3) (in-S? (- n 3)))
+        (#t #f)))

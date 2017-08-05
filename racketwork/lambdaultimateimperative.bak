@@ -1,0 +1,17 @@
+;; 1. do iteration desugares into TCO recursive calls.
+(do ((i 0 (+ 1 i)))
+  ((eq? 10 i) 'done)
+  (display i))
+
+
+;; 2. compound statements can be emulated as later
+;; functions nested
+(define (s1)
+  (display "s1 executing\n"))
+
+(define (s2)
+  (display "s2 executing\n"))
+
+;; we convert it to imperative like sequential execution
+((lambda (dummy) (s2)) (s1))
+    

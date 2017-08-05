@@ -1,8 +1,3 @@
-
-
-
-
-
 [1,2,3].map(x => x*x);
 // object destructuring assignment
 
@@ -133,6 +128,6 @@ p1.getName();
 
 // Object.assign() for mixins
 
-
-
-
+function testfn(){
+  console.log('this is a test function');
+}

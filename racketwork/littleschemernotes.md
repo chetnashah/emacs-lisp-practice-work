@@ -64,8 +64,69 @@ Ask three questions :1 (null? l) 2. (atom? (car l)) 3. (list? l). Essentially re
 * and like most fp languages, comparision of lambdas is
 undefined.
 
+* a relation is a set of pairs
+* a relation is a function if no two keys are same in all pairs
+
+ch- friends and relations
+* build functions to collect more than one value at a time
+
+* a function is partial if it is not defined for all possible arguments
+* otherwise it is a total function
+
+* Eleventh commandment: Use additional arguments when a function needs to know what other arguments to the function have been like so far,
+
+*  or I think we can put them in an outsde closure, like for memoization??
+
+* A combinator is a lambda expression with no free variables
+
+* Y Combinator : It is a higher order function that takes single argument : a function that is not recursive and returns a version of function that is recursive. Or in other words, it is an operator that enables recursion when you can't refer to a function from within itself
+(http://mvanier.livejournal.com/2897.html)
+
+* fixpoint of functions: Fixpoint of a given function is a point where input is same as function applied to input. e.g. cos(0.7390) = 0.7390, We say number 0.7390 is the fixpoint of cosine function. The fixpoint is the value x where f(x)=x
+* Bear in mind, fixpoint x can be a number, or x can be also a function, if f is a higher order function.
+
+* Fixpoints can be any type of thing, as long as the functions that generate them have same type of input and output.
+
+* A fix point combinator e.g. Y, Z, etc. satisfy following
+
+Y f = f (Y f)
+Z f = f (Z f)
+
+an example implementation of Y is 
+Y = &#955;f.(&#955;x.f (x x)) (&#955;x.f (x x))
+
+A typical expansion would go like
+Y f = f (f (f (... f (Y f))))
+thus helping do recursive stuff with non recursive function f.
+
+This above expansion doesn't work for strict languages since execution
+never terminates but fine for lazy evaluation
+
+* letrec can define more than one functions like let
+
+* 13th Commandment: use letrec to hide and protect functions
 
 
+### Let binding
+
+Evaluating a let expression
+```
+(let ((name1 exp1)
+      (name2 exp2)
+      ...
+      (namek expk)) body)
+```
+in an environment creates a single frame that binds each expi. This single frame is created after evaluating each expi, and the frame holds all the bindings namei:expi. The body is then evaluated in the context of this new environment that starts at this single frame. Evaluating a let statement is essentially the same as applying a procedure (see below).
+
+On the other hand, evaluating a let* expression
+```
+(let* ((name1 exp1)
+       (name2 exp2)
+       ...
+       (namek expk)) body)
+```
+in an environment creates a sequence of new frames with the specified bindings. Each successive expi is evaluated in the environment containing the new frames created by the first i-1 bindings. A new frame is then created with the single binding namei:expi and appended to the front of the environment. Finally the body is evaluated in the environment with the k new frames.
+This is not quite equivalent to creating a procedure object with one parameter for each name (see the Application Rule below), since here the bindings are done sequentially and k different frames are created, whereas in the case of procedures, only one new frame is created with all the bindings.
 
 
-
+* use letcc to return values early.
