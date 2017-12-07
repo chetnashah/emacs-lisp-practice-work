@@ -29,11 +29,16 @@
 
 ;; we convert it to imperative like sequential execution
 ;; by nesting later statements inside lambdas
-(
- (lambda (dummy)
+;; note lambdas here are purely exploited for their
+;; control flow aspect and return values are ignored alltogether.
+((lambda (dummy)
    (s2))
- (s1)
-)
+ (s1))
+;; understand above construction as following:
+;; 1. lambda returns anonymous procedure which takes in dummy
+;; and runs s2 when called
+;; 2. (s1) does whatever s1 is supposed to do
+;; 3. (anonymous-procedure) runs it and prints s2
 
 (display "-------------\n")
 

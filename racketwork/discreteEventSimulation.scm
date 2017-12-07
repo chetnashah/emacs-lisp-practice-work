@@ -242,7 +242,6 @@
 ;; (add-to-agenda! <time> <action> <agenda>)
 ;; mutate agenda object by adding action procedure to be run at specified
 ;; time
-
 (define (add-to-agenda! time action agenda)
   (define (belongs-before? segments)
     (or (null? segments)
