@@ -1,0 +1,7 @@
+#lang racket
+
+;; empty list: null
+;; cons constructor: cons
+;; access head/tail: car/cdr
+;; check for empty: null?
+

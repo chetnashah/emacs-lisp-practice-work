@@ -13,4 +13,10 @@ chez
 chibi
 mit
 
+Racket vs Scheme:
+
+- How empty list is written
+- Cons cells are immutable in racket
+- How modules work.
+
 

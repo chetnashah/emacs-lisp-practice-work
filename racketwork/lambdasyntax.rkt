@@ -1,0 +1,14 @@
+
+(let ((jj '(1 2 2 2)))
+  (apply + jj))
+
+; in below code ii acts as a rest parameter because there are no braces around ii
+; i.e. during execution ii binds to '(1 2 3 4)
+(let ((k (lambda ii (apply + ii))))
+  (k 1 2 3 4))
+
+;; lambda with regular parameters has brackets
+;; below lambda takes two parameters a and b
+(let ((u (lambda (a b) (+ a b))))
+  (u 2 24))
+
