@@ -53,3 +53,7 @@ trace: (facti 24 0)
 trace: 24
 
 
+## Dr Racket
+
+Auto complete in Dr. Racket IDE works using Ctrl + /
+

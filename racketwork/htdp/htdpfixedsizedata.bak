@@ -1,0 +1,7 @@
+#lang racket
+
+(+ 3 5)
+
+(abs -4)
+
+(add1 99)
