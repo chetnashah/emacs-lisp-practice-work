@@ -1,0 +1,5 @@
+#lang racket
+
+;; memoization
+;; useful caching for pure functions, since same input gives same output then why compute again and again
+

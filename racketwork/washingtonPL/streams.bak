@@ -1,0 +1,4 @@
+#lang racket
+
+;; a stream is an infinite sequence of values.
+;; key idea: use thunk to delay creating rest of sequence.
