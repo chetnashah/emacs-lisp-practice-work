@@ -1,0 +1,9 @@
+#lang racket
+
+;; writing an interpreter
+
+;; variable, in order to evaluate a variable, look it up in environment
+
+;; (eval-under-env e env) an inner helper function
+
+;; (eval-exp e) is the interpreter which calls helper with empty environment.

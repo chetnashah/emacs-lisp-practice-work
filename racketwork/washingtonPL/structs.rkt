@@ -1,0 +1,18 @@
+#lang racket
+
+;; racket struct help generate tagged bag of fields (like ML constructors)
+;; help you introduce a cartesian product of values, with a tagname
+
+(struct posn (x y) #:transparent) ;; posn is struct-name and x, y are its fields
+
+;; defining struct introduces following functions
+;; 1. struct constructor to make new values of struct
+(define point1 (posn 2 3))
+
+;; 2. struct predicate, to check if given value confirms to a struct
+(posn? point1)
+(posn? 11)
+
+;; 3. field accessors for each field in struct
+(posn-x point1)
+(posn-y point1)

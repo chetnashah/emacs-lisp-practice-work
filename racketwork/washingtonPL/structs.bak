@@ -1,0 +1,5 @@
+#lang racket
+
+;; racket struct
+;; help you introduce a record value e.g. a cartesian product of values.
+
