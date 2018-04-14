@@ -27,4 +27,8 @@ evaluate functionname to get closure,
 extend the gotten closure with parameter values, and evaluate the body in this environment.
 
 
+### 
 
+* Every built in value has a commonType/tag let's say theType: number or string or boolean or pair or symbol etc, which usually comes into picture while using predicates like number?, string? on values.
+
+* Each struct definition allows to create a new constructor/tag dynamically adding it to theType.

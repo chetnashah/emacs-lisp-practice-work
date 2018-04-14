@@ -1,0 +1,10 @@
+#lang racket
+
+;; although we cannot define sum types in racket,
+;; it is useful to create predicates that can check for them
+
+;; a light is either
+;; "red"
+;; "green"
+;; "yellow"
+

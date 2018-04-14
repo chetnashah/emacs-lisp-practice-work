@@ -1,0 +1,6 @@
+#lang racket
+
+;; default state is stopped
+;; on signal it shows green person for 10 seconds
+;; then starts countdown state
+;; after countdown is over go back to default state

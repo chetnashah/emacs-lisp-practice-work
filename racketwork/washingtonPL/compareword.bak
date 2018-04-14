@@ -1,0 +1,4 @@
+#lang racket
+
+;; A 1string is a String of length 1
+

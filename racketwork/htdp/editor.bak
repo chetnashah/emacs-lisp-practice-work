@@ -1,0 +1,7 @@
+#lang racket
+
+;; represent a text-editor
+;; where the text is (string-append pre post)
+;; and the cursor is placed after pre and before post
+(struct editor [pre post])
+

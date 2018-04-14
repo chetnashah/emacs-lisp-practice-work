@@ -1,0 +1,9 @@
+#lang racket
+
+;; implementing finite state machines using big-bang
+;; program a recognizer for a(b|c)*d
+;; initial color white
+;; once a is seen, color yellow
+;; red color for error state
+;; green color for satisfied state
+

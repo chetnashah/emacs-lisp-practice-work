@@ -1,0 +1,5 @@
+#lang racket
+
+
+(strcut hmstime [hours mins secs])
+
