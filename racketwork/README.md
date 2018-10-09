@@ -57,3 +57,22 @@ trace: 24
 
 Auto complete in Dr. Racket IDE works using Ctrl + /
 
+### Doing IO with racket
+
+reading from files
+```racket
+;; http://docs.racket-lang.org/teachpack/2htdpbatch-io.html
+;; read-file :: file/stdin -> string?
+(define s (read-file "ttt.txt"))
+(define s (read-file 'stdin))
+
+;; read-lines :: file/stdin -> (listof string?)
+(define s (read-lines "ttt.txt))
+(define s (read-lines 'stdin))
+
+;; read-line directly reads from input-port, which is stdin by default
+;; http://docs.racket-lang.org/reference/ports.html
+(define s (read-line))
+
+```
+
