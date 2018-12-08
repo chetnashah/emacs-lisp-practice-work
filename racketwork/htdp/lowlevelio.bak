@@ -1,0 +1,13 @@
+#lang racket
+
+;; a racket port represents a source or sink of data
+;; like a file, a terminal, a tcp connection
+
+;; ports provide sequential acess
+
+;; functions for generating ports
+;; - open-output-file
+;; - open-input-file
+
+;; functions for writing/reading to ports
+;; 

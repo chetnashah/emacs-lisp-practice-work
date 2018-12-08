@@ -1,0 +1,10 @@
+#lang racket
+
+(define HEIGHT 80)
+(define WIDTH 100)
+(define XSHOTS (/ WIDTH 2))
+
+;; graphical constants
+(define BACKGROUND (empty-scene WIDTH HEIGHT))
+(define (SHOT (triangle 3 "solid" "red")))
+

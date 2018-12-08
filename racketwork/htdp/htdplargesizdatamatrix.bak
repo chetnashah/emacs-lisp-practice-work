@@ -1,0 +1,5 @@
+#lang racket
+
+;;transpose matrix along diagonal
+;; transpose :: Matrix -> Matrix
+

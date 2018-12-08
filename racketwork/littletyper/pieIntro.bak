@@ -1,0 +1,10 @@
+#lang pie
+
+'spinach
+
+2
+
+;; (the Type expr)
+;; asserts that expr has type Type
+(the (Pair Atom Nat)
+  (cons 'spinach 2))

@@ -1,0 +1,33 @@
+#lang pie
+
+'spinach
+
+2
+
+;; (the Type expr)
+;; asserts that expr has type Type
+(the (Pair Atom Nat)
+  (cons 'spinach 2))
+
+;; the evaluated value of the-expr is same as that of
+;; expr used in the clause.
+;; i.e. the value of (the X e) is e.
+(car
+  (the (Pair Atom Nat)
+    (cons 'abc 1)))
+
+(Pair Atom Atom)
+;; (the U (Pair Atom Atom))
+
+;; U : The universe of all possible types does not have a type
+;; notice no "the" in the output
+U
+
+;; the type of types is U
+(the U Atom)
+
+;; (the U U) is not possible
+;; bcoz of russell's paradox
+
+(Pair U U) ;; no the
+(Pair Atom U) ;; no the

@@ -1,0 +1,7 @@
+#lang racket
+
+;; col takes a number and an Image
+;; and repeats Image vertically for n times
+;; Number, Image -> Image
+(define (col n img)
+  img)
