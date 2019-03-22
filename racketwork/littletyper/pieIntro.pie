@@ -4,10 +4,10 @@
 
 2
 
-;; (the Type expr)
-;; asserts that expr has type Type
+;; (the Type expr)  ot  (the T E)
+;; asserts that expr has type Type, returning same if true, else errors out.
 (the (Pair Atom Nat)
-  (cons 'spinach 2))
+  (cons 'spinach 4))
 
 ;; the evaluated value of the-expr is same as that of
 ;; expr used in the clause.
@@ -16,6 +16,7 @@
   (the (Pair Atom Nat)
     (cons 'abc 1)))
 
+;; writing expr prints "The" clause on the REPL
 (Pair Atom Atom)
 ;; (the U (Pair Atom Atom))
 

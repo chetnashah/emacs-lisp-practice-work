@@ -1,0 +1,15 @@
+#lang racket
+
+;; By using define-syntax we are making a transformer binding.
+;; Effectively telling Racket compiler, whenever encounterirng a chunk of syntax starting with foo
+;; give it to transformer function specified and replace it with syntax returned from the transformer
+
+(define-syntax foo
+  (lambda (stx)
+    (syntax "doo doo")))
+
+;; similar to define and lambda, one can use shorthand at binding
+
+(define-syntax (foo2 stx)
+  (syntax "woo hoo"))
+
